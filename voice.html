@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>ボイスまとめ｜Misty Mare</title>
+  <meta charset="UTF-8" />
+  <title>Misty Mare</title>
   <style>
- body {
+body {
   margin: 0;
   padding: 0;
   font-family: 'Georgia', '游明朝', serif;
-  color: #e0f7fa; /* 青白く光る文字 */
-  background-image: url('https://i.imgur.com/O9oCkqv.jpg'); /* ダークなレンガ */
+  color: #e0f7fa;
+  background-image: url('https://images.unsplash.com/photo-1576858993826-061f640b1b30?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
   background-attachment: fixed;
+  background-position: center;
   position: relative;
 }
 
-/* 照明感：青い光を背景にフィルターとして重ねる */
 body::before {
   content: "";
   position: fixed;
@@ -23,43 +23,82 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom right, rgba(0, 30, 60, 0.7), rgba(0, 50, 90, 0.6));
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0.95),
+    rgba(10, 20, 30, 0.85)
+  );
   z-index: -1;
+  pointer-events: none;
 }
 
-/* ヘッダーとナビを半透明に */
-header {
-  background-color: rgba(27, 38, 59, 0.85);
-  padding: 1em;
-  text-align: center;
+@keyframes float {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-30px, -50px); }
+  100% { transform: translate(0, 0); }
 }
 
-/* ナビリンク */
-nav a {
-  color: #a8dadc;
-  margin: 0 1em;
-  text-decoration: none;
-  font-weight: bold;
+.smoke {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.015) 10%, transparent 70%);
+  animation: float 60s linear infinite;
+  z-index: 2;
+  pointer-events: none;
+  filter: blur(6px);
+  opacity: 0.6;
 }
-
-nav a:hover {
-  text-decoration: underline;
-}
-
-/* 本文エリア */
-main {
-  padding: 2em;
-  max-width: 800px;
-  margin: auto;
-  background-color: rgba(13, 27, 42, 0.7); /* 背景にうっすら深海ブルー */
-  border-radius: 10px;
-}
-
+    
+    .logo {
+      height: 60px;
+      cursor: pointer;
+      margin: 1em;
+    }
+    nav.menu {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background-color: rgba(13, 27, 42, 0.9);
+      text-align: center;
+      padding: 1em 0;
+      transform: translateY(-100%);
+      transition: transform 0.5s ease;
+      z-index: 100;
+    }
+    nav.menu.show {
+      transform: translateY(0);
+    }
+    nav a {
+      display: block;
+      color: #a8dadc;
+      font-size: 1.2em;
+      text-decoration: none;
+      margin: 0.5em 0;
+      font-weight: bold;
+    }
+    main {
+      padding: 2em;
+      max-width: 800px;
+      margin: auto;
+      background-color: rgba(13, 27, 42, 0.7);
+      border-radius: 10px;
+    }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
+  <div class="smoke"></div>
+
   <header>
-    <nav>
+    <div class="logo-menu" onclick="toggleMenu()">
+      <img src="https://i.imgur.com/J10mDUH.png" alt="Misty Mare" class="logo">
+    </div>
+    <nav id="navMenu" class="menu hidden">
       <a href="index.html">ホーム</a>
       <a href="mare.html">Mare紹介</a>
       <a href="shop.html">お店の紹介</a>
@@ -67,12 +106,47 @@ main {
       <a href="contact.html">お問い合わせ</a>
     </nav>
   </header>
-  <main>
-    <h1>ボイスまとめ</h1>
 
-    <div class="voice">
-      <h2>サンプルボイス①：自己紹介</h2>
-      <p>公開日：2025年8月予定</p>
-      <p>静かに語るMareの第一声。</p>
-      <!-- ▼埋め込みタイプ（例：SoundCloud） -->
-      <!
+  <main>
+    <h1>ようこそ、Misty Mareへ</h1>
+    <p>ここは静かな裏路地の奥、深海のような場所。</p>
+    <p>これからこの場所に、ボイスや言葉を少しずつ並べていきます。</p>
+  </main>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("navMenu");
+    if (menu.classList.contains("hidden")) {
+      menu.classList.remove("hidden");
+      setTimeout(() => {
+        menu.classList.add("show");
+      }, 10);
+    } else {
+      menu.classList.remove("show");
+      setTimeout(() => {
+        menu.classList.add("hidden");
+      }, 500);
+    }
+  }
+
+  // 「一度ナビを開ききってから」ページ遷移する動き
+  document.querySelectorAll('#navMenu a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault(); // 通常のリンク動作を止める
+      const href = this.getAttribute('href');
+      const menu = document.getElementById("navMenu");
+
+      // 一度ナビを「開いた状態」にして、
+      menu.classList.remove("hidden");
+      menu.classList.add("show");
+
+      // 1秒後（表示演出時間）にページ遷移
+      setTimeout(() => {
+        window.location.href = href;
+      }, 1000); // ←演出の待機時間（調整できる）
+    });
+  });
+</script>
+
+</body>
+</html>
