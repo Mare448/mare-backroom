@@ -74,10 +74,14 @@
       background-color: rgba(13, 27, 42, 0.7);
       border-radius: 10px;
     }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="smoke"></div>
+
   <header>
     <div class="logo-menu" onclick="toggleMenu()">
       <img src="https://i.imgur.com/J10mDUH.png" alt="Misty Mare" class="logo">
@@ -90,6 +94,7 @@
       <a href="contact.html">お問い合わせ</a>
     </nav>
   </header>
+
   <main>
     <h1>ようこそ、Misty Mareへ</h1>
     <p>ここは静かな裏路地の奥、深海のような場所。</p>
@@ -99,8 +104,18 @@
   <script>
     function toggleMenu() {
       const menu = document.getElementById("navMenu");
-      menu.classList.toggle("show");
-      if (menu.classList.contains("show")) {
+      if (menu.classList.contains("hidden")) {
         menu.classList.remove("hidden");
+        setTimeout(() => {
+          menu.classList.add("show");
+        }, 10);
       } else {
-        setTimeout
+        menu.classList.remove("show");
+        setTimeout(() => {
+          menu.classList.add("hidden");
+        }, 500);
+      }
+    }
+  </script>
+</body>
+</html>
