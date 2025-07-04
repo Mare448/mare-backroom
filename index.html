@@ -1,51 +1,50 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>Misty Mare</title>
-  <style>
-    body {
-      background-color: #0d1b2a;
-      color: #ffffff;
-      font-family: 'Helvetica', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #1b263b;
-      padding: 1em;
-      text-align: center;
-    }
-    nav a {
-      color: #ffffff;
-      margin: 0 1em;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    main {
-      padding: 2em;
-      max-width: 800px;
-      margin: auto;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <nav>
-      <a href="index.html">ホーム</a>
-      <a href="mare.html">Mare紹介</a>
-      <a href="shop.html">お店の紹介</a>
-      <a href="voice.html">ボイス</a>
-      <a href="contact.html">お問い合わせ</a>
-    </nav>
-  </header>
-  <main>
-    <h1>ようこそ、Misty Mareへ</h1>
-    <p>ここは静かな裏路地の奥、深海のような場所。</p>
-    <p>これからこの場所に、ボイスや言葉を少しずつ並べていきます。</p>
-  </main>
-</body>
-</html>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Georgia', '游明朝', serif;
+  color: #e0f7fa; /* 青白く光る文字 */
+  background-image: url('https://i.imgur.com/O9oCkqv.jpg'); /* ダークなレンガ */
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* 照明感：青い光を背景にフィルターとして重ねる */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right, rgba(0, 30, 60, 0.7), rgba(0, 50, 90, 0.6));
+  z-index: -1;
+}
+
+/* ヘッダーとナビを半透明に */
+header {
+  background-color: rgba(27, 38, 59, 0.85);
+  padding: 1em;
+  text-align: center;
+}
+
+/* ナビリンク */
+nav a {
+  color: #a8dadc;
+  margin: 0 1em;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* 本文エリア */
+main {
+  padding: 2em;
+  max-width: 800px;
+  margin: auto;
+  background-color: rgba(13, 27, 42, 0.7); /* 背景にうっすら深海ブルー */
+  border-radius: 10px;
+}
