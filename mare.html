@@ -130,4 +130,18 @@
       }
     }
 
-    // メニ
+   document.querySelectorAll('#navMenu a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const href = this.getAttribute('href');
+      const menu = document.getElementById("navMenu");
+
+      menu.classList.remove("hidden");
+      menu.classList.add("show");
+
+      setTimeout(() => {
+        window.location.href = href;
+      }, 1000);
+    });
+  });
+</script>
