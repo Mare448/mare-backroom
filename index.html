@@ -1,35 +1,88 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Misty Mare</title>
   <style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Georgia', '游明朝', serif;
-    color: #e0f7fa;
-    background-image: url('https://i.imgur.com/G7iEo5R.jpg'); /* ←安定画像に変更！ */
-    background-size: cover;
-    background-attachment: fixed;
-    position: relative;
-  }
-
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom right, rgba(0, 30, 60, 0.7), rgba(0, 50, 90, 0.6));
-    z-index: -1;
-  }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', '游明朝', serif;
+      color: #e0f7fa;
+      background-image: url('https://i.imgur.com/G7iEo5R.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, rgba(0, 30, 60, 0.7), rgba(0, 50, 90, 0.6));
+      z-index: -1;
+    }
+    .smoke {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 10%, transparent 70%);
+      animation: float 20s infinite linear;
+      z-index: 0;
+      pointer-events: none;
+    }
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(-20px, -30px); }
+      100% { transform: translate(0, 0); }
+    }
+    .logo {
+      height: 60px;
+      cursor: pointer;
+      margin: 1em;
+    }
+    nav.menu {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background-color: rgba(13, 27, 42, 0.9);
+      text-align: center;
+      padding: 1em 0;
+      transform: translateY(-100%);
+      transition: transform 0.5s ease;
+      z-index: 100;
+    }
+    nav.menu.show {
+      transform: translateY(0);
+    }
+    nav a {
+      display: block;
+      color: #a8dadc;
+      font-size: 1.2em;
+      text-decoration: none;
+      margin: 0.5em 0;
+      font-weight: bold;
+    }
+    main {
+      padding: 2em;
+      max-width: 800px;
+      margin: auto;
+      background-color: rgba(13, 27, 42, 0.7);
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
+  <div class="smoke"></div>
   <header>
-    <nav>
+    <div class="logo-menu" onclick="toggleMenu()">
+      <img src="https://i.imgur.com/J10mDUH.png" alt="Misty Mare" class="logo">
+    </div>
+    <nav id="navMenu" class="menu hidden">
       <a href="index.html">ホーム</a>
       <a href="mare.html">Mare紹介</a>
       <a href="shop.html">お店の紹介</a>
@@ -42,5 +95,12 @@
     <p>ここは静かな裏路地の奥、深海のような場所。</p>
     <p>これからこの場所に、ボイスや言葉を少しずつ並べていきます。</p>
   </main>
-</body>
-</html>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("navMenu");
+      menu.classList.toggle("show");
+      if (menu.classList.contains("show")) {
+        menu.classList.remove("hidden");
+      } else {
+        setTimeout
