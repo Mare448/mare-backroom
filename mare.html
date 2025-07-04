@@ -2,61 +2,58 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>Misty Mare</title>
+  <title>Mare紹介 - Misty Mare</title>
   <style>
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Georgia', '游明朝', serif;
-  color: #e0f7fa;
-  background-image: url('https://images.unsplash.com/photo-1576858993826-061f640b1b30?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  position: relative;
-}
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', '游明朝', serif;
+      color: #e0f7fa;
+      background-image: url('https://images.unsplash.com/photo-1576858993826-061f640b1b30?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      position: relative;
+    }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to bottom right,
-    rgba(0, 0, 0, 0.95),
-    rgba(10, 20, 30, 0.85)
-  );
-  z-index: -1;
-  pointer-events: none;
-}
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.95), rgba(10, 20, 30, 0.85));
+      z-index: -1;
+      pointer-events: none;
+    }
 
-@keyframes float {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(-30px, -50px); }
-  100% { transform: translate(0, 0); }
-}
+    .smoke {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.015) 10%, transparent 70%);
+      animation: float 60s linear infinite;
+      z-index: 2;
+      pointer-events: none;
+      filter: blur(6px);
+      opacity: 0.6;
+    }
 
-.smoke {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.015) 10%, transparent 70%);
-  animation: float 60s linear infinite;
-  z-index: 2;
-  pointer-events: none;
-  filter: blur(6px);
-  opacity: 0.6;
-}
-    
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(-30px, -50px); }
+      100% { transform: translate(0, 0); }
+    }
+
     .logo {
       height: 60px;
       cursor: pointer;
       margin: 1em;
     }
+
     nav.menu {
       position: absolute;
       top: 0;
@@ -68,9 +65,11 @@ body::before {
       transition: transform 0.5s ease;
       z-index: 100;
     }
+
     nav.menu.show {
       transform: translateY(0);
     }
+
     nav a {
       display: block;
       color: #a8dadc;
@@ -79,6 +78,7 @@ body::before {
       margin: 0.5em 0;
       font-weight: bold;
     }
+
     main {
       padding: 2em;
       max-width: 800px;
@@ -86,6 +86,7 @@ body::before {
       background-color: rgba(13, 27, 42, 0.7);
       border-radius: 10px;
     }
+
     .hidden {
       display: none;
     }
@@ -108,45 +109,25 @@ body::before {
   </header>
 
   <main>
-    <h1>ようこそ、Misty Mareへ</h1>
-    <p>ここは静かな裏路地の奥、深海のような場所。</p>
-    <p>これからこの場所に、ボイスや言葉を少しずつ並べていきます。</p>
+    <h1>Mareについて</h1>
+    <p>Mareは、静かな裏路地にひっそりと佇む《Misty Mare》の管理人。</p>
+    <p>……いつもは黙って煙を吸ってるけど、話しかければ、何かぽつりと返ってくるかも。</p>
   </main>
 
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById("navMenu");
-    if (menu.classList.contains("hidden")) {
-      menu.classList.remove("hidden");
-      setTimeout(() => {
-        menu.classList.add("show");
-      }, 10);
-    } else {
-      menu.classList.remove("show");
-      setTimeout(() => {
-        menu.classList.add("hidden");
-      }, 500);
-    }
-  }
-
-  // 「一度ナビを開ききってから」ページ遷移する動き
-  document.querySelectorAll('#navMenu a').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault(); // 通常のリンク動作を止める
-      const href = this.getAttribute('href');
+  <script>
+    function toggleMenu() {
       const menu = document.getElementById("navMenu");
+      if (menu.classList.contains("hidden")) {
+        menu.classList.remove("hidden");
+        setTimeout(() => {
+          menu.classList.add("show");
+        }, 10);
+      } else {
+        menu.classList.remove("show");
+        setTimeout(() => {
+          menu.classList.add("hidden");
+        }, 500);
+      }
+    }
 
-      // 一度ナビを「開いた状態」にして、
-      menu.classList.remove("hidden");
-      menu.classList.add("show");
-
-      // 1秒後（表示演出時間）にページ遷移
-      setTimeout(() => {
-        window.location.href = href;
-      }, 1000); // ←演出の待機時間（調整できる）
-    });
-  });
-</script>
-
-</body>
-</html>
+    // メニ
