@@ -1,44 +1,135 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>お問い合わせ｜Misty Mare</title>
+  <meta charset="UTF-8" />
+  <title>お問い合わせ - Misty Mare</title>
   <style>
     body {
-      background-color: #0d1b2a;
-      color: #ffffff;
-      font-family: 'Helvetica', sans-serif;
       margin: 0;
       padding: 0;
+      font-family: 'Georgia', '游明朝', serif;
+      color: #e0f7fa;
+      background-image: url('https://images.unsplash.com/photo-1576858993826-061f640b1b30?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      position: relative;
     }
-    header {
-      background-color: #1b263b;
-      padding: 1em;
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.95), rgba(10, 20, 30, 0.85));
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .smoke {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.015) 10%, transparent 70%);
+      animation: float 60s linear infinite;
+      z-index: 2;
+      pointer-events: none;
+      filter: blur(6px);
+      opacity: 0.6;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(-30px, -50px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .logo {
+      height: 60px;
+      cursor: pointer;
+      margin: 1em;
+    }
+
+    nav.menu {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background-color: rgba(13, 27, 42, 0.9);
       text-align: center;
+      padding: 1em 0;
+      transform: translateY(-100%);
+      transition: transform 1s ease;
+      z-index: 100;
     }
+
+    nav.menu.show {
+      transform: translateY(0);
+    }
+
     nav a {
-      color: #ffffff;
-      margin: 0 1em;
+      display: block;
+      color: #a8dadc;
+      font-size: 1.2em;
       text-decoration: none;
+      margin: 0.5em 0;
       font-weight: bold;
     }
-    nav a:hover {
-      text-decoration: underline;
-    }
+
     main {
       padding: 2em;
       max-width: 800px;
       margin: auto;
+      background-color: rgba(13, 27, 42, 0.7);
+      border-radius: 10px;
     }
-    a.link {
-      color: #a8dadc;
-      text-decoration: underline;
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin: 1em 0 0.3em;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      padding: 0.7em;
+      border: none;
+      border-radius: 5px;
+      background-color: #fff;
+      font-size: 1em;
+      color: #003344;
+    }
+
+    button {
+      margin-top: 1.5em;
+      padding: 0.8em;
+      background-color: #457b9d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
+  <div class="smoke"></div>
+
   <header>
-    <nav>
+    <div class="logo-menu" onclick="toggleMenu()">
+      <img src="https://i.imgur.com/J10mDUH.png" alt="Misty Mare" class="logo">
+    </div>
+    <nav id="navMenu" class="menu hidden">
       <a href="index.html">ホーム</a>
       <a href="mare.html">Mare紹介</a>
       <a href="shop.html">お店の紹介</a>
@@ -46,21 +137,55 @@
       <a href="contact.html">お問い合わせ</a>
     </nav>
   </header>
+
   <main>
     <h1>お問い合わせ</h1>
-    <p>Mareへのご感想・ご質問・ご依頼などがあれば、以下からどうぞ。</p>
+    <p>感想、質問、依頼など、お気軽にどうぞ。</p>
 
-    <ul>
-      <li>X（旧Twitter）のDM：  
-        <a href="https://twitter.com/messages/compose?recipient_id=@mare_backroom" target="_blank" class="link">▶︎ DMはこちら</a>
-      </li>
-      <li>マシュマロ：  
-        <a href="https://marshmallow-qa.com/o7rpc1xa7jo065u" target="_blank" class="link">▶︎ 質問・感想を送る</a>
-      </li>
-      <li>Googleフォーム（準備中の場合は後日追加でOK）</li>
-    </ul>
+    <form action="https://formspree.io/f/manjzyoa" method="POST">
+      <label for="name">お名前（またはHN）</label>
+      <input type="text" name="name" id="name" required>
 
-    <p style="opacity: 0.6;">※お返事にはお時間をいただくことがあります。</p>
+      <label for="email">メールアドレス</label>
+      <input type="email" name="email" id="email" required>
+
+      <label for="message">メッセージ内容</label>
+      <textarea name="message" id="message" rows="6" required></textarea>
+
+      <button type="submit">送信</button>
+    </form>
   </main>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("navMenu");
+      if (menu.classList.contains("hidden")) {
+        menu.classList.remove("hidden");
+        setTimeout(() => {
+          menu.classList.add("show");
+        }, 10);
+      } else {
+        menu.classList.remove("show");
+        setTimeout(() => {
+          menu.classList.add("hidden");
+        }, 1000);
+      }
+    }
+
+    document.querySelectorAll('#navMenu a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        const menu = document.getElementById("navMenu");
+
+        menu.classList.remove("hidden");
+        menu.classList.add("show");
+
+        setTimeout(() => {
+          window.location.href = href;
+        }, 1000);
+      });
+    });
+  </script>
 </body>
 </html>
