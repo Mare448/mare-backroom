@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>送信完了 - Misty Mare</title>
+  <title>お問い合わせ - Misty Mare</title>
   <style>
     body {
       margin: 0;
@@ -48,43 +48,144 @@
       100% { transform: translate(0, 0); }
     }
 
+    .logo {
+      height: 60px;
+      cursor: pointer;
+      margin: 1em;
+    }
+
+    nav.menu {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background-color: rgba(13, 27, 42, 0.9);
+      text-align: center;
+      padding: 1em 0;
+      transform: translateY(-100%);
+      transition: transform 1s ease;
+      z-index: 100;
+    }
+
+    nav.menu.show {
+      transform: translateY(0);
+    }
+
+    nav a {
+      display: block;
+      color: #a8dadc;
+      font-size: 1.2em;
+      text-decoration: none;
+      margin: 0.5em 0;
+      font-weight: bold;
+    }
+
     main {
-      padding: 3em;
-      max-width: 700px;
-      margin: 10vh auto;
+      padding: 2em;
+      max-width: 800px;
+      margin: auto;
       background-color: rgba(13, 27, 42, 0.7);
       border-radius: 10px;
-      text-align: center;
     }
 
-    h1 {
-      font-size: 2em;
-      margin-bottom: 0.5em;
+    form {
+      display: flex;
+      flex-direction: column;
     }
 
-    p {
-      font-size: 1.2em;
-      margin-bottom: 2em;
+    label {
+      margin: 1em 0 0.3em;
+      font-weight: bold;
     }
 
-    a.button {
-      display: inline-block;
-      padding: 0.8em 2em;
+    input, textarea {
+      padding: 0.7em;
+      border: none;
+      border-radius: 5px;
+      background-color: #fff;
+      font-size: 1em;
+      color: #003344;
+    }
+
+    button {
+      margin-top: 1.5em;
+      padding: 0.8em;
       background-color: #457b9d;
       color: white;
-      text-decoration: none;
+      border: none;
       border-radius: 5px;
-      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
   <div class="smoke"></div>
 
+  <header>
+    <div class="logo-menu" onclick="toggleMenu()">
+      <img src="https://i.imgur.com/J10mDUH.png" alt="Misty Mare" class="logo">
+    </div>
+    <nav id="navMenu" class="menu hidden">
+      <a href="index.html">ホーム</a>
+      <a href="mare.html">Mare紹介</a>
+      <a href="shop.html">お店の紹介</a>
+      <a href="voice.html">ボイス</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+  </header>
+
   <main>
-    <h1>送信、完了しました。</h1>
-    <p>煙の向こうで、ちゃんと届いています。</p>
-    <a class="button" href="index.html">ホームに戻る</a>
+    <h1>お問い合わせ</h1>
+    <p>感想、質問、依頼など、お気軽にどうぞ。</p>
+
+    <form action="https://formspree.io/f/manjzyoa" method="POST">
+      <label for="name">お名前（またはHN）</label>
+      <input type="text" name="name" id="name" required>
+
+      <label for="email">メールアドレス</label>
+      <input type="email" name="email" id="email" required>
+
+      <label for="message">メッセージ内容</label>
+      <textarea name="message" id="message" rows="6" required></textarea>
+
+      <button type="submit">送信</button>
+    </form>
   </main>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("navMenu");
+      if (menu.classList.contains("hidden")) {
+        menu.classList.remove("hidden");
+        setTimeout(() => {
+          menu.classList.add("show");
+        }, 10);
+      } else {
+        menu.classList.remove("show");
+        setTimeout(() => {
+          menu.classList.add("hidden");
+        }, 1000);
+      }
+    }
+
+    document.querySelectorAll('#navMenu a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        const menu = document.getElementById("navMenu");
+
+        menu.classList.remove("hidden");
+        menu.classList.add("show");
+
+        setTimeout(() => {
+          window.location.href = href;
+        }, 1000);
+      });
+    });
+  </script>
 </body>
 </html>
