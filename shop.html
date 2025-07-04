@@ -102,3 +102,36 @@
   <main>
     <h1>お店について</h1>
     <p>《Misty Mare》は、煙にまぎれた裏路地の奥にある小さ
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("navMenu");
+    if (menu.classList.contains("hidden")) {
+      menu.classList.remove("hidden");
+      setTimeout(() => {
+        menu.classList.add("show");
+      }, 10);
+    } else {
+      menu.classList.remove("show");
+      setTimeout(() => {
+        menu.classList.add("hidden");
+      }, 500);
+    }
+  }
+
+  document.querySelectorAll('#navMenu a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const href = this.getAttribute('href');
+      const menu = document.getElementById("navMenu");
+
+      menu.classList.remove("hidden");
+      menu.classList.add("show");
+
+      setTimeout(() => {
+        window.location.href = href;
+      }, 1000);
+    });
+  });
+</script>
+      
