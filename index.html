@@ -117,19 +117,35 @@ body::before {
   function toggleMenu() {
     const menu = document.getElementById("navMenu");
     if (menu.classList.contains("hidden")) {
-      menu.classList.remove("hidden"); // ← これを先に外す！
-      // ほんの少し待ってから .show を追加してアニメ開始
+      menu.classList.remove("hidden");
       setTimeout(() => {
         menu.classList.add("show");
       }, 10);
     } else {
-      menu.classList.remove("show"); // アニメで上に戻す
-      // アニメが終わってから .hidden を付ける
+      menu.classList.remove("show");
       setTimeout(() => {
         menu.classList.add("hidden");
       }, 500);
     }
   }
+
+  // 「一度ナビを開ききってから」ページ遷移する動き
+  document.querySelectorAll('#navMenu a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault(); // 通常のリンク動作を止める
+      const href = this.getAttribute('href');
+      const menu = document.getElementById("navMenu");
+
+      // 一度ナビを「開いた状態」にして、
+      menu.classList.remove("hidden");
+      menu.classList.add("show");
+
+      // 1秒後（表示演出時間）にページ遷移
+      setTimeout(() => {
+        window.location.href = href;
+      }, 1000); // ←演出の待機時間（調整できる）
+    });
+  });
 </script>
 
 </body>
