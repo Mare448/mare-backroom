@@ -2,14 +2,14 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>Mare紹介 - Misty Mare</title>
+  <title>店長について - Misty Mare</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Georgia', '游明朝', serif;
       color: #e0f7fa;
-      background-image: url('https://images.unsplash.com/photo-1576858993826-061f640b1b30?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-image: url('https://images.unsplash.com/photo-1576858993826-061f640b1b30?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0');
       background-size: cover;
       background-attachment: fixed;
       background-position: center;
@@ -83,8 +83,31 @@
       padding: 2em;
       max-width: 800px;
       margin: auto;
-      background-color: rgba(13, 27, 42, 0.7);
+      background-color: rgba(13, 27, 42, 0.75);
       border-radius: 10px;
+      line-height: 1.8;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      border-bottom: 1px solid #a8dadc;
+      margin-bottom: 1em;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #b2dfdb;
+      margin: 2em 0;
+    }
+
+    .profile-section {
+      margin-top: 1.5em;
+    }
+
+    .profile-section strong {
+      display: inline-block;
+      width: 6em;
+      color: #b2ebf2;
     }
 
     .hidden {
@@ -109,9 +132,21 @@
   </header>
 
   <main>
-    <h1>Mareについて</h1>
-    <p>Mareは、静かな裏路地にひっそりと佇む《Misty Mare》の管理人。</p>
-    <p>……いつもは黙って煙を吸ってるけど、話しかければ、何かぽつりと返ってくるかも。</p>
+    <h1>店長について</h1>
+
+    <p class="quote">……私のことなんて、<br>別に知らなくてもいいかも。<br><br>でも、気になるなら──<br>まぁ、好きに見て。</p>
+
+    <div class="profile-section">
+      <p><strong>名前：</strong>Mare（マレ）</p>
+      <p><strong>年齢：</strong>不明（20代前半に見える）</p>
+      <p><strong>性別：</strong>女性</p>
+      <p><strong>身長：</strong>160cmくらい</p>
+      <p><strong>外見：</strong>肩につくグレーの髪、深海のような青い目。黒いシャツとパンツを着こなし、白から紺へグラデーションしたマウスピースを首に下げている。</p>
+      <p><strong>声：</strong>中性的でやや高め。静かで落ち着いた話し方。</p>
+      <p><strong>口調：</strong>一人称は「私」。口癖は「〜かも」「まぁ、〜」</p>
+      <p><strong>この場所：</strong>裏路地の奥、《Misty Mare》という名のシーシャバーを一人で営んでいる。</p>
+      <p><strong>背景：</strong>幼い頃、マフィアのボスに拾われ育てられた。この店は、そのボスが用意した“誰にも見つからない”隠れ家でもある。</p>
+    </div>
   </main>
 
   <script>
@@ -130,18 +165,20 @@
       }
     }
 
-   document.querySelectorAll('#navMenu a').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const href = this.getAttribute('href');
-      const menu = document.getElementById("navMenu");
+    document.querySelectorAll('#navMenu a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        const menu = document.getElementById("navMenu");
 
-      menu.classList.remove("hidden");
-      menu.classList.add("show");
+        menu.classList.remove("hidden");
+        menu.classList.add("show");
 
-      setTimeout(() => {
-        window.location.href = href;
-      }, 1000);
+        setTimeout(() => {
+          window.location.href = href;
+        }, 1000);
+      });
     });
-  });
-</script>
+  </script>
+</body>
+</html>
